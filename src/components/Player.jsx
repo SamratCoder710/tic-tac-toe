@@ -1,14 +1,19 @@
 import { useState } from "react";
 
-function Player({ name, symbol }) {
+function Player({ name, symbol,active,onChangeName }) {
+  console.log("Player")
   const [isEditing, setIsEditing] = useState(false);
   const [playerName, setPlayerName] = useState(name);
   const handleEditClick = () => {
     setIsEditing((prev) => !prev);
+
+    if(isEditing){
+      onChangeName(symbol,playerName);
+    }
   };
   return (
-    <li>
-      <span className="player">
+    <li className={`${active?'active':''}`}>
+      <span className={`player`}>
         {isEditing ? (
           <input
             type="text"
